@@ -1,0 +1,94 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Notes{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block user-name %}{{student.name}}{% endblock user-name %}
+
+{% block class_dropdown %}
+ <div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+                <a href="{% url "add-notes" class_id=class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">
+    <div class="form-container">
+        <form class="form" action = "{% url "add-notes" class_id=class_id %}" method = "post">
+            {% csrf_token %}
+            <div class="center">
+                <div class="header mb-25">
+                    <h1 class="semi-bold">Add Notes</h1>
+                </div>     
+                <div class="field-main-container">
+                    <div class="field-container hidden">
+                        <div class="field-label">
+                          <label for="" class="medium">Class id :</label>
+                        </div>
+                        <div class="field-value">
+                          <input type="text" placeholder="Ex: CCS339" class="text-field" name="class_id" value="{{class_id}}"/>
+                        </div>
+                    </div>
+                    <div class="field-container mb-20">
+                        <div class="field-label">
+                            <label for="note">Note Name : </label>
+                        </div>
+                        <div class="field-value">
+                            <input type="text" class="text-field" name = "note_name" placeholder="" required="">
+                        </div>     
+                    </div>
+                    <div class="field-container mb-20">
+                        <div class="field-label">
+                            <label for="note">Subject : </label>
+                        </div>
+                        <div class="field-value">
+                            <p class="regular">
+                                <div class="dropdown-div">
+                                    <select name="subject_name" class="dropdown-select">
+                                        <option>Select a Subject</option>
+                                        {% for subject in subjects %}
+                                            <option value="{{subject.code}}">{{subject.name}}</option>
+                                        {% endfor %}
+                                  </select>
+                                </div>
+                              </p>
+                        </div>     
+                    </div>
+                    <div class="field-container mb-25">
+                        <div class="field-label">
+                            <label for="note" class="regular">Select note :  </label>
+                        </div>
+                        <div class="field-value">
+                            <input type="file" class="file-field" name = "note_file" required="">
+                        </div>        
+                    </div> 
+                    <div class="buttons-container mb-5 mr-">
+                            <button class="submit-button" type="submit" name = "submit"> Upload </button>     
+                    </div> 
+                </div> 
+            </div>
+                               
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  notes = document.getElementById("notes");
+    notes.classList.add("active"); 
+</script>
+{% endblock js %}

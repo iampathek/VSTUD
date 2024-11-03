@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BASE{% endblock title %}</title>
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href=" {% static "css/common/style.css" %}">
+    <link rel="stylesheet" href=" {% static "css/staff/style.css" %}">
+    <link rel="stylesheet" href=" {% static "css/staff/admin.css" %}">
+    {% block style %}{% endblock style %}
+</head>
+<body>
+    <!-- Complete Page -->
+    <div class="container">
+
+        <!-- Complete Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <h1 class="bold cursor-pointer">VSTUD</h1>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-items">
+                    <div class="class-forms">
+                        <div class="header">
+                            <p class="bold">Class Related</p>
+                        </div>
+                        <div class="menu-item">
+                            <a href=" {% url "add-attendance-form" _date=date  class_id=class_id %} ">
+                                <div class="menu-item-content active">
+                                    <span class="menu-text">Attendance</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="">
+                                <div class="menu-item-content">
+                                    <span class="menu-text">Notes</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href=" {% url "staff-ia-result" class_id %} ">
+                                <div class="menu-item-content">
+                                    <span class="menu-text">Timetable</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="exam-forms">
+                        <div class="header">
+                            <p class="bold">Exams Related</p>
+                        </div>
+                        <div class="menu-item">
+                            <a href=" {% url "staff-attendance" class_id %} ">
+                                <div class="menu-item-content">
+                                    <span class="menu-text">Results</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="">
+                                <div class="menu-item-content">
+                                    <span class="menu-text">Exams</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="additional-forms">
+                        <div class="header">
+                            <p class="bold">Additional Forms</p>
+                        </div>
+                        <div class="menu-item">
+                            <a href=" {% url "staff-attendance" class_id %} ">
+                                <div class="menu-item-content">
+                                    <span class="menu-text">Users</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="">
+                                <div class="menu-item-content">
+                                    <span class="menu-text">Subjects</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="">
+                                <div class="menu-item-content">
+                                    <span class="menu-text">Academic Details</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="overlay" id="overlay"></div>
+            <div class="toolbar">
+                <div class="initial">
+                    <div class="menu-btn" id="menu-btn">
+                        <span class="material-symbols-outlined openbtn cursor-pointer" onclick="openNav()">
+                            menu
+                        </span>
+                    </div>
+                    <div class="class-container">
+                            <span class="cursor-pointer uppercase" id="class-dropdown-trigger">{{class_id}}</span>  
+                    </div>
+                </div>
+                <div class="profile-container">
+                        <span class="material-symbols-outlined cursor-pointer">
+                            account_circle
+                        </span>
+                </div>
+            </div>
+            <div class="profile-dropdown-menu">
+                <div id="profile-dropdown-menu-content" class="profile-dropdown-menu-content">
+                    <div class="greeting">
+                        {% if student %}
+                            <h4 class="bold">Hello, {{staff.user.first_name}}</h4>
+                        {% elif staff %}
+                        <h4 class="bold">Hello, {{staff.user.first_name}}</h4>
+                        {% endif %}
+                    </div>
+                    <a href="#" >Profile</a>
+                    <a href="#">Reset Password</a>
+                    <a href="{% url "logout" %}" >Logout</a>
+                </div>
+            </div>
+            {% block class_dropdown %}{% endblock class_dropdown %}
+            {% block main_content %}{% endblock main_content %}
+        </div>
+    </div>
+
+    <script src=" {% static "js/script.js" %}"></script>
+    <script>
+        var class_dropdown_trigger = document.getElementById("class-dropdown-trigger");
+        var class_dropdown_menu_content = document.getElementById("class-dropdown-menu-content");
+        var first_class_dropdown_menu_item = class_dropdown_menu_content.querySelector('a');
+        first_class_dropdown_menu_item.style.borderTop = "none";
+    </script>
+    {% block js %}{% endblock js %}
+</body>
+</html>

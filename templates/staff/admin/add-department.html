@@ -1,0 +1,69 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Department{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "staff-notes" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">            
+    <div class="form-container">
+        <form action="{% url "add-department" %}" class="form" method="POST">
+            {% csrf_token %}
+            <div class="header">
+                <h1 class="bold">Add Department</h1>
+            </div>
+            <div class="field-main-container">
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="department-name">Department Name :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="text-field" name="department-name" id="department-name" placeholder="Enter Dept name ..." required>
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="department-code">Department Code :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="text-field" name="department-code" id="department-code" placeholder="Enter Dept code..." required>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="save-and-exit-button mr-20">
+                    <button type="submit">Save & Exit</button>
+                </div>
+                <div class="next-button">
+                    <button type="submit">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  academic_details = document.getElementById("academic-details");
+    academic_details.classList.add("active"); 
+</script>
+{% endblock js %}

@@ -1,0 +1,103 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Course{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "staff-notes" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">            
+    <div class="form-container">
+        <form action="{% url "add-course" %}" class="form" method="POST">
+            {% csrf_token %}
+            <div class="header">
+                <h1 class="bold">Add Course</h1>
+            </div>
+            <div class="field-main-container">
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-department">Department :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="department" id="select-department" required class="dropdown-select">
+                                    {% for department in departments %}
+                                        <option value="{{department.code}}">{{department.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-section">Section :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="section" id="select-section" required class="dropdown-select">
+                                    <option value="a">A</option>
+                                    <option value="b">B</option>
+                                    <option value="c">C</option>
+                                    <option value="d">D</option>
+                                    <option value="e">E</option>
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="join-year">Year Of Join :</label>
+                    </div>
+                    <div class="field-value">
+                       <input type="text" class="text-field" name="join-year" id="join-year" required>
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="exit-year">Year Of Exit :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="text-field" name="exit-year" id="exit-year" required>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="save-and-exit-button mr-20">
+                    <button type="submit">Save & Exit</button>
+                </div>
+                <div class="next-button">
+                    <button type="submit">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  academic_details = document.getElementById("academic-details");
+    academic_details.classList.add("active"); 
+</script>
+{% endblock js %}

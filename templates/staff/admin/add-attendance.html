@@ -1,0 +1,111 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Attendance Form{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+<link rel="stylesheet" href="{% static "css/staff/admin.css" %}">
+{% endblock style %}
+
+
+{% block class_dropdown %}
+ <div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+                <a href="{% url "add-attendance-form" class_id=class.class_id _date=date %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">
+    <div class="form-container">
+        <form class="form" method="post" action = "{% url "add-attendance-form" class_id date %} ">
+            {% csrf_token %}
+            <div class="header mb-25">
+                <h1 class="semi-bold">Add Attendance</h1>
+            </div> 
+            <div class="field-main-container">
+                <div class="field-container hidden">
+                    <div class="field-label">
+                      <label for="" class="medium">Class id :</label>
+                    </div>
+                    <div class="field-value">
+                      <input type="text" placeholder="Ex: CCS339" class="text-field" name="class_id" value="{{class_id}}"/>
+                    </div>
+                </div>
+                <div class="field-container hidden">
+                    <div class="field-label">
+                        <label class="medium">Reg No :</label>
+                    </div>
+                    <div class="field-value">
+                        <input class="number-field" type="text" name="reg_no" value="{{student.register_number}}" />
+                    </div>  
+                </div> 
+                <div class="field-container">
+                    <div class="field-label">
+                        <p class="medium">Register No :</p>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">{{student.register_number}}</p>
+                    </div>  
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <p class="medium">Name :</p>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">{{student.user.first_name}}</p>
+                    </div>
+                </div> 
+                <div class="field-container">
+                    <div class="field-label">
+                        <label class="medium">Date : </label>
+                    </div>
+                    <div class="field-value">
+                        <input type="date" class="date-field" id = "date-field" name="date" value="{{date}}">
+                    </div>
+                </div> 
+                <div class="field-container">
+                    <div class="field-label">
+                        <label class="medium">Status : </label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                          <div class="dropdown-div">
+                              <select name="present-status" class="dropdown-select">
+                                <option value="True" selected>Present</option>
+                                <option value="False">Absent</option>
+                            </select>
+                          </div>
+                        </p>
+                      </div>
+                </div>   
+            </div> 
+            <div class="buttons-container">
+                <div class="save-and-exit-button">
+                    <button type = "submit" name="save-and-exit">Save & Exit</button>
+                </div>
+                <div class="next-button">
+                    <button type = "submit" name="next">Next</button>
+                </div>
+            </div>
+                  
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+<script src=" {% static "js/forms.js" %} "></script>
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  attendance = sidebar_menu.getElementById("attendance");
+    attendance.classList.add("active"); 
+</script>
+{% endblock js %}

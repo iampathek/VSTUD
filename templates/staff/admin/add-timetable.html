@@ -1,0 +1,96 @@
+
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add TimeTable Form{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/add_timetable_form.css" %}">
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "staff-attendance" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">
+    <div class="add-timetable-container">
+        <form action="{% url "add-timetable-form" class_id %}" method="post" class="add-timetable-form">
+            {% csrf_token %}
+            <div class="heading margin-btm">
+                <h1 class="bold">Add TimeTable</h1>
+            </div>
+            <div class="add-timetable-main">
+                <div class="add-timetable-item margin-btm">
+                    <div class="label-item">
+                        <label for="day">Select Day :</label>
+                    </div>
+                    <div class="value-item">
+                        <select name="day" id="day">
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="add-timetable-item margin-btm">
+                    <div class="label-item">
+                        <label for="start-time">Start Time :</label>
+                    </div>
+                    <div class="value-item">
+                        <input type="time" name="start_time">
+                    </div>
+                </div>
+                <div class="add-timetable-item margin-btm">
+                    <div class="label-item">
+                        <label for="end-time">End Time :</label>
+                    </div>
+                    <div class="value-item">
+                        <input type="time" name="end_time">
+                    </div>
+                </div>
+                <div class="add-timetable-item margin-btm">
+                    <div class="label-item">
+                        <label for="period">Select Period:</label>
+                    </div>
+                    <div class="value-item">
+                        <select name="period" id="period">
+                            {% for subject in subjects %}
+                            <option value="{{subject.code}}">{{subject.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="add-timetable-item submit margin-btm">
+                    <button type="submit" name="save_and_exit">Save&Exit</button>
+                    <button type="submit" name="save_and_next">Save&Next</button>  
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  timetable = document.getElementById("timetable");
+    timetable.classList.add("active"); 
+</script>
+{% endblock js %}
+
+
+

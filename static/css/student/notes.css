@@ -1,0 +1,141 @@
+.all-notes {
+   background-color: #fff;
+   padding: 30px;
+   margin: 20px;
+   margin-top: 30px;
+   box-shadow: 0px 0px 10px 5px #0000000d;
+}
+.notes-main-container {
+    display: flex;
+   padding-left: 40px;
+   padding-top: 40px;
+   margin-bottom: 20px;
+    width: 100%;
+}
+.notes-icon {
+   margin-right: 15px;
+} 
+.notes-container {
+   width: 100%;
+   padding-right: 60px;
+}
+.notes-container * {
+   margin-bottom: 2px;
+}
+.subject-name-container {
+   display: flex;
+   justify-content: space-between;
+}
+.staff_name-date {
+   display: flex;
+   margin-bottom: 10px;
+}
+.horizontal-line {
+   width: 100%;
+   margin-bottom: 20px;
+}
+.notes .note {
+   display: flex;
+   padding: 10px;
+   text-decoration: none;
+   color: #333;
+   transition: background-color 0.3s ease;
+   border-left: 1px solid #594bda93;
+   border-bottom: 1px solid #594bda93; 
+   border-radius: 10px; 
+   box-shadow: 0px 0px 10px 3px #0000000d;  
+}
+
+.note:hover {
+   background-color: #594BDA20;;
+   cursor: pointer;
+}
+.pdf-icon {
+   width: 20%;
+   text-align: center;
+}
+.note-name {
+   width: 40%;
+   text-align: center;
+   align-items: center;
+}
+.unit-date {
+   width: 20%;
+   text-align: center;
+}
+.other-units:hover {
+   background-color: #594BDA20;;
+   border: 1px solid #999;
+   cursor: pointer;
+}
+.share-icon {
+   width: 10%;
+   text-align: center;
+}
+.download-icon {
+   width: 10%;
+   text-align: center;
+}
+.note-header {
+   display: flex;
+   padding: 10px;
+   text-decoration: none;
+   color: #000000;
+   background-color: #594BDA20;
+   transition: background-color 0.3s ease;
+   text-align: center;
+}
+.note-header .type-of-note {
+   width: 20%;
+}
+.note-header .name-of-note {
+   width: 40%;
+} 
+.note-header .date-of-note {
+   width: 20%;
+}
+td span{
+    transition: all 0.3s ease;
+}
+th, td{
+    padding: 14px;
+    margin: auto;
+}
+tr:hover td{
+    background-color: #594BDA20;
+}
+td:hover span{
+    color: red;
+}
+/* CSS for mobile */
+@media(max-width: 800px) {
+   .notes-container {
+       padding: 10px;
+   }
+   .notes-icon {
+       display: none;
+       margin-top: 20px;
+   }
+   .staff_name-date span {
+       display: none;
+   }
+   .notes-main-container {
+       display: flex;
+       padding: 25px;
+       margin-bottom: 20px;
+       width: 100%;
+   }
+   .staff-name {
+       width: 78%;
+   }
+   .date {
+       width: 22%;
+       margin-right: 55px
+   }
+   .staff_name-date span {
+       display: none;
+   }
+}
+.hidden {
+   display: none;
+}

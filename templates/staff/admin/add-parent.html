@@ -1,0 +1,101 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Parent{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "admin-attendance" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">            
+    <div class="form-container">
+        <form action="{% url "add-parent" %}" class="form" method="POST">
+            {% csrf_token %}
+            <div class="header">
+                <h1 class="bold">Add Parent</h1>
+            </div>
+            <div class="field-main-container">
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="first-name">First Name</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="text-field" name="first-name" id="first-name" placeholder="Enter first name ..." required>
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="last-name">Last Name</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="text-field" name="last-name" id="last-name" placeholder="Enter last name ..." required>
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="email" class="text-field" name="email" id="email" placeholder="Enter email ..." required>
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="student">Select Student</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="student" id="student" required class="dropdown-select">
+                                    {% for student in students %}
+                                    <option value="{{student.user.username}}">{{student.user.username}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="mobile-number">Mobile number :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="number" id="mobile-number" placeholder="xxxxx-xxxxx" class="number-field" required name="phone-no">
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="save-and-exit-button mr-20">
+                    <button type="submit">Save & Exit</button>
+                </div>
+                <div class="next-button">
+                    <button type="submit">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  users = document.getElementById("users");
+    users.classList.add("active"); 
+</script>
+{% endblock js %}

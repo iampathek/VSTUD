@@ -1,0 +1,106 @@
+.profile-details-container{
+    background-color: #fff;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 70vh;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 7px 7px #0000000d;
+    margin-inline: 50px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+.profile-header{
+    margin-bottom: 20px;
+}
+.profile-header span{
+    font-size: 17px;
+}
+.profile-main{
+    display: flex;
+    width: 100%;
+}
+.profile-image{
+    width: 30%;
+}
+.profile-image img{
+    border-radius: 50px;
+    width: 70%;
+    object-fit: contain;
+    border: 3px solid #fff;
+}
+.profile-content{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.personal-details,.academic-details,.extra-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+}
+.personal-header,.academic-header,.extra-header{
+    color: gray;
+}
+.mbtm-1{
+    margin-bottom: 15px;
+}
+.mbtm-2{
+    margin-bottom: 20px;
+}
+.value,.key{
+    width: 50%;
+}
+
+.key span{
+    font-size: 12px;
+}
+.key,.value{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.personal-item,.academic-item,.extra-item{
+    display: flex;
+    justify-content: flex-start;
+}
+@media screen and (max-width:1200px) {
+    .profile-details-container{
+        margin: 24px;
+    }
+    .profile-content{
+        width: 50%;
+    }
+    .profile-header span{
+        font-size: 15px;
+    }
+    
+}
+@media screen and (max-width:800px) {
+    .profile-details-container{
+        padding: 24px 5px 24px 5px;
+    }
+    .profile-main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile-image{
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;     
+    }
+    .profile-image img{
+        width: 100%;
+    }
+    .profile-content{
+        width: 80%;
+    }
+    .profile-content{
+        overflow: scroll;
+        scrollbar-width: none;
+    }
+}

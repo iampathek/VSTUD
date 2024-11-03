@@ -1,0 +1,46 @@
+{% load static %}
+{% load custom_filters %}
+{% block title %}Check Your Mail{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block user-name %}{{staff.name}}{% endblock user-name %}{{staff.name}}
+
+{% block class_dropdown %}
+ <div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+                <a href="{% url "add-notes-form" class_id=class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">
+    <div class="form-container">
+        <form action = " {% url "check-mail-notification" %} " class="form" method = "post">
+            {% csrf_token %}
+           <div class="message">
+            <p>We have sent a mail to you, click the link on it</p>
+           </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var footer_node = document.getElementById("footer");
+    var active_node = footer_node.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var notes = document.getElementById("notes");
+    notes.classList.add("active");
+</script>
+{% endblock js %}
+
+

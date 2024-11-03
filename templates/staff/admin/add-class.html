@@ -1,0 +1,141 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Class{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "staff-notes" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">            
+    <div class="form-container">
+        <form action="{%url "add-class" %}" method="POST" class="form">
+            {% csrf_token %}
+            <div class="header">
+                <h1 class="bold">Add Class</h1>
+            </div>
+            <div class="field-main-container">
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-course">Select Course :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="course" id="select-course" required class="dropdown-select">
+                                    {% for course in courses %}
+                                    <option value="{{course.course_id}}">{{course.course_id}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-semester">Select Semester :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="semester" id="select-semester" required class="dropdown-select">
+                                    <option value="default">Please select semester</option>
+                                    <option value="i">I</option>
+                                    <option value="2">II</option>
+                                    <option value="3">III</option>
+                                    <option value="4">IV</option>
+                                    <option value="5">V</option>
+                                    <option value="6">VI</option>
+                                    <option value="7">VII</option>
+                                    <option value="8">VIII</option>
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-year">Select Year :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="year" id="select-year" required class="dropdown-select">
+                                    <option value="default">Please select Year</option>
+                                    <option value="i">I</option>
+                                    <option value="2">II</option>
+                                    <option value="3">III</option>
+                                    <option value="4">IV</option>
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="sem-start-date">Sem Start Date :</label>
+                    </div>
+                    <div class="field-value">
+                       <input type="date" class="date-field" name="sem-start-date" id="sem-start-date" required>
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="sem-end-date">Sem End Date :</label>
+                    </div>
+                    <div class="field-value">
+                       <input type="date" class="date-field" name="sem-end-date" id="sem-end-date" required>
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-coordinator">Select Coordinator :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="coordinator" id="select-coordinator" required class="dropdown-select">
+                                    {% for staff in all_staff %}
+                                    <option value="{{staff.user}}">{{staff.user}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="save-and-exit-button mr-20">
+                    <button type="submit">Save & Exit</button>
+                </div>
+                <div class="next-button">
+                    <button type="submit">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  academic_details = document.getElementById("academic-details");
+    academic_details.classList.add("active"); 
+</script>
+{% endblock js %}

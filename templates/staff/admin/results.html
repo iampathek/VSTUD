@@ -1,0 +1,78 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Results{% endblock title %}
+
+{% block style %}
+    <link rel="stylesheet" href= "{% static "css/staff/attendance.css" %}" >
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "admin-results" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+
+<div class="main-content">
+    <div class="admin-container">
+        <div class="inner-header">
+            <div class="extra-menu-items">
+
+            </div>
+            <div class="action-buttons">
+                <a href="{% url "add-timetable-form" class_id=class_id %}">Add New</a>
+            </div>
+        </div>
+        <div class="results" id="results">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Code</th>
+                            <th>Subject Name</th>
+                            <th>Exam</th>
+                            <th>Marks/Grade Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                        <tr>
+                            <td>{{result.student.user.username}}</td>
+                            <td>{{result.exam.subject.code}}</td>
+                            <td>{{result.exam.subject.name}}</td>
+                            <td>{{result.exam.name}}</td>
+                            {% if result.marks %}
+                            <td>{{result.marks}}</td>
+                            {% else %}
+                            <td>{{result.grade}}</td>
+                            {% endif %}
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  results = document.getElementById("results");
+    results.classList.add("active"); 
+</script>
+{% endblock js %}

@@ -1,0 +1,35 @@
+.menu-items .header {
+    opacity: 0.6;
+    margin-bottom: 4px;
+    background-color: rgba(250, 233, 214, 0.5);
+    padding: 16px;
+}
+.menu-item-content {
+    border: none;
+    margin-bottom: 4px;
+}
+.admin-container {
+    background-color: #fff;
+    box-shadow: 0px 5px 7px #0000000d;
+    margin: 20px;
+    padding: 20px;
+}
+.inner-header {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.inner-header .action-buttons a{
+    color: #594bda;
+    font-weight: 800;
+    opacity: 0.5;
+    transition: all 0.2s ease-in-out;
+}
+.inner-header .action-buttons:hover a {
+    opacity: 1;
+}
+.hidden {
+    display: none;
+}

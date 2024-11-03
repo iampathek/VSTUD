@@ -1,0 +1,95 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Exam{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "staff-notes" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">            
+    <div class="form-container">
+        <form action="{% url "add-exam" class_id %}" class="form" method="POST">
+            {% csrf_token %}
+            <div class="header">
+                <h1 class="bold">Add Exam</h1>
+            </div>
+            <div class="field-main-container">
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-exam">Select exam :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="exam-name" id="select-exam" required class="dropdown-select">
+                                    <option value="ia1">IA-1</option>
+                                    <option value="ia2">IA-2</option>
+                                    <option value="ia3">IA-3</option>
+                                    <option value="model">Model</option>
+                                    <option value="semester">semester</option>
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="select-subject">Select Subject :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="subject" id="select-subject" required class="dropdown-select">
+                                    {% for subject in subjects %}
+                                    <option value="{{subject.code}}">{{subject.name}}-{{subject.class_related}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </p>       
+                    </div>
+                </div>
+                <div class="field-container ">
+                    <div class="field-label">
+                        <label for="exam-date">Exam Date :</label>
+                    </div>
+                    <div class="field-value">
+                       <input type="date" class="date-field" name="exam-date" id="exam-date" required>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="save-and-exit-button mr-20">
+                    <button type="submit">Save & Exit</button>
+                </div>
+                <div class="next-button">
+                    <button type="submit">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  exams = document.getElementById("exams");
+    exams.classList.add("active"); 
+</script>
+{% endblock js %}

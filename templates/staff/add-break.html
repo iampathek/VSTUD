@@ -1,0 +1,72 @@
+{% extends "staff/form-base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Student Form{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block user-name %}{{staff.name}}{% endblock user-name %}{{staff.name}}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "add-break" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">
+    <div class="form-container">
+        <form action="{% url "add-break" class_id %}" method="post">
+            {% csrf_token %}
+            <div class="form-header">
+                <div class="path">
+                    Currently Working With <span class="bold">Break</span> Form In <span class="bold">ADD</span> Mode
+                </div>
+                <div class="back">
+                    <a href="#">Back</a>
+                </div>
+            </div>
+            <div class="form-content">
+                <div class="field-container">
+                    <div class="label-container">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" name="name" id="name">
+                    </div>
+                </div>
+                <div class="field-container hidden">
+                    <div class="label-container">
+                        <label for="class-id">Class Id</label>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" name="class-id" value="{{class_id}}" id="class-id">
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button type="submit" name="save_and_exit" class="cursor-pointer">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var footer_node = document.getElementById("footer");
+    var active_node = footer_node.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var notes = document.getElementById("notes");
+    notes.classList.add("active");
+</script>
+{% endblock js %}

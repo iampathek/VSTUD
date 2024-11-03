@@ -1,0 +1,214 @@
+/* Login Form */
+body, html {
+    height: 100%;
+}
+
+.error-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 25px;
+}
+
+.login-image {
+
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;  
+}
+
+label {
+  margin-left: 15px;
+}
+
+.form {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px 3px #0000000d; 
+  -webkit-box-shadow: 0px 0px 10px 3px #0000000d;
+  -moz-box-shadow: 0px 0px 10px 3px #0000000d;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+/* CSS for input fields */
+
+.input-field {
+    width: 80%;
+    padding: 12px;
+    font-size: 14px;
+    font-family: inherit;
+    border: 1px solid #594bda20;
+    border-radius: 25px;
+    background-color: #FFFFFF;
+    transition: all .3s;
+    width: calc(100% - 128px);
+  }
+  
+  .input-field::placeholder {
+    color: #000000;
+    font-size: 14px;
+    opacity: 0.5;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    box-shadow: 0px 0px 3px 3px #0000000d;
+    -webkit-box-shadow: 0px 0px 3px 3px #0000000d;
+    -moz-box-shadow: 0px 0px 3px 3px #0000000d;
+    border: none;
+    transition: all .3s;
+  }
+
+/* CSS for labels to be aligned horzontally with their respective input fields */
+  label {
+    display: inline-block;
+    width: 100px;
+  }
+
+  /* CSS for submit button */
+  .submit {
+    display: flex;
+    justify-content: center;
+  }
+
+  .submit-button {
+    
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #5A4BDA;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #5A4BDA;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #5A4BDA;
+  }
+  
+  .submit-button:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #5A4BDA;
+  }
+  
+  .submit-button:active {
+    transform: scale(0.9);
+  }
+
+  .mb-20 {
+    margin-bottom: 20px;
+   }
+   
+   .mb-25 {
+       margin-bottom: 25px;
+   }
+   
+   .mb {
+       margin-bottom: 5px;
+   }
+
+   /* CSS for Error Alert */
+.error {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #FCE8DB;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+    margin-right: 10px;
+  }
+  
+  .error-icon {
+    width: 20px;
+    height: 20px;
+    transform: translateY(-2px);
+  }
+  
+  .error-title {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .error-close {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    justify-content: start;
+  }
+
+  .error-close span:hover {
+      width: 25px; /* Adjust size of the circle */
+      height: 25px; /* Adjust size of the circle */
+      border-radius: 50%;
+      background-color: rgba(128, 109, 109, 0.712);
+  }
+
+  /* .error-close button {
+    border: none;
+    background-color: none;
+
+  } */
+
+  /*---------------------------------- CSS for login form in mobiles ----------------------------------------------- */
+@media(max-width: 800px)
+{
+  
+  /* CSS for main container */
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  /* CSS for login image*/
+
+  .login-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+    width: 100%;
+  }
+  
+/* CSS for login form on the right side */
+  .form {
+    box-shadow: 0 0 30px rgba(183, 0, 255, 0.1);
+    padding: 30px;
+    width: 90%;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-family: inherit;
+    border-radius: 25px;
+    background-color: #FFFFFF;
+    transition: all .3s;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+}
+

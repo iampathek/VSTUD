@@ -1,0 +1,129 @@
+.attendance {
+    box-sizing: border-box;
+    width: calc(100%-60px);
+    min-height:340px;
+    background-color: #fff;
+    margin: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    -webkit-box-shadow:0px 5px 7px #0000000d;
+    -moz-box-shadow:0px 5px 7px #0000000d;
+    box-shadow: 0px 5px 7px #0000000d;
+}
+.day-present, .day-absent{
+    width: 40%;
+    height: 200px;
+    background-color: rgb(250, 233, 214);
+    box-shadow: 0px 5px 7px #0000000d;
+    border: 1px solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.day-present span, .day-absent span {
+    font-size: 80px;
+}
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.day-absent {
+    background-color: rgb(231, 248, 243);
+}
+
+.absentees-container{
+    
+    margin: 30px;
+    box-shadow: 0px 0px 10px 3px #0000000d; 
+    -webkit-box-shadow: 0px 0px 10px 3px #0000000d;
+     -moz-box-shadow: 0px 0px 10px 3px #0000000d;
+     background-color: #fff;
+     padding: 10px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     
+}
+.holiday {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.holiday img{
+    width: 50%;
+}
+
+.absentees-container table{
+    margin: 10px;
+    box-shadow: 0px 0px 10px 3px #0000000d; 
+    -webkit-box-shadow: 0px 0px 10px 3px #0000000d;
+     -moz-box-shadow: 0px 0px 10px 3px #0000000d;
+     overflow: scroll;
+     
+}
+.absentees-list table, .absentees-list th, .absentees-list td{
+    border: 0.3px solid black;
+    border-collapse: collapse;
+    
+
+}
+.absentees-list th, .absentees-list td{
+    padding: 20px;
+    text-align: center;
+}
+.absentees-container h1{
+    padding: 7px;
+}
+
+
+
+@media screen and (max-width:800px) {
+    .attendance {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .day-present, .day-absent {
+        width: 80%;
+        margin: 24px;
+        height: 200px;
+    }
+    .day-absent {
+        margin-top: 0;
+    }
+    .day-present span, .day-absent span {
+        font-size: 60px;
+    }
+    .absentees-list th, .absentees-list td{
+        padding: 10px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .absentees-container{
+        margin: 14px;
+        padding: 14px;
+    }
+    .absentees-list td, .absentees-list th {
+        padding: 8px;
+    }
+    .absentees-container div{
+        width: 100%;
+        overflow: scroll;
+        margin: auto;
+        padding: auto;
+    }
+}
+
+    
+
+
+
+

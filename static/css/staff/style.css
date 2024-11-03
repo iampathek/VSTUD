@@ -1,0 +1,69 @@
+.class-container span{
+    border-bottom: 1px solid #594bda;
+    border-left: 1px solid #594bda;
+    padding: 8px;
+    border-radius: 10px;
+    letter-spacing: 0.1ch;
+}
+.class-container:hover span{
+    background-color: #594bda20;
+}
+.class-dropdown-menu{
+    position: relative;
+}
+.class-dropdown-menu-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    min-height: auto;
+    box-shadow: 0px 0px 7px 7px #0000000d;
+    margin-right: 10px;
+    border-radius: 5px;
+    left: 20px;
+}
+.class-dropdown-menu-content a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-top: 0.5px solid #7a71c9;
+}
+.class-dropdown-menu-content:hover {
+    border-radius: 5px;
+}
+.class-dropdown-menu-content a:hover {
+    background-color: #594bda20;
+    border-radius: 5px;
+}
+.extra-menu-items {
+    display: flex;
+    margin-bottom: 20px;
+}
+.extra-menu-items .menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-color: #594bda;
+    border-bottom: 1px solid #594bda;
+    cursor: pointer;
+}
+.extra-menu-items .menu-item:hover {
+    background-color: #594bda20;
+}
+.extra-menu-items .active {
+    border-bottom: none;
+    border-top: 1px solid #594bda;
+}
+@media screen and (max-width:800px) {
+    .class-container span{
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+    }
+    .class-dropdown-menu-content {
+        left: 50px;
+    }
+}

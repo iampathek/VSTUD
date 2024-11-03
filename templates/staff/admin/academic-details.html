@@ -1,0 +1,157 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Academic{% endblock title %}
+
+{% block style %}
+    <link rel="stylesheet" href= "{% static "css/staff/attendance.css" %}" >
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "admin-academic-details" %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+
+<div class="main-content">
+    <div class="admin-container">
+        <div class="inner-header">
+            <div class="extra-menu-items">
+                <div class="menu-item class active" onclick="switchTab('class')">Classes</div>
+                <div class="menu-item course" onclick="switchTab('course')">Course</div>
+                <div class="menu-item department" onclick="switchTab('department')">Department</div>
+            </div>
+            <div class="action-buttons">
+                <a href="{% url "add-class" %}">Add New</a>
+            </div>
+        </div>
+        <div class="class" id="class">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Semester</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Coordinator Username</th>
+                            <th>Coordinator First Name</th>
+                            <th>Coordinator Last Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for class in classes %}
+                        <tr>
+                            <td>{{class.course.course_id}}</td>
+                            <td>{{class.semester}}</td>
+                            <td>{{class.start_date}}</td>
+                            <td>{{class.end_date}}</td>
+                            <td>{{class.coordinator.user.username}}</td>
+                            <td>{{class.coordinator.user.first_name}}</td>
+                            <td>{{class.coordinator.user.last_name}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="course hidden" id="course">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Department</th>
+                            <th>Year Of Join</th>
+                            <th>Year Of Exit</th>
+                            <th>Section</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td>{{course.department.name}}</td>
+                            <td>{{course.year_of_join}}</td>
+                            <td>{{course.year_of_exit}}</td>
+                            <td>{{course.section}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="department hidden" id="department">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Department Name</th>
+                            <th>Department Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for department in departments %}
+                        <tr>
+                            <td>{{department.name}}</td>
+                            <td>{{department.code}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  academic_details = document.getElementById("academic-details");
+    academic_details.classList.add("active"); 
+
+    function switchTab(tab) {
+        var div = document.getElementById(tab);
+        var menu = document.getElementsByClassName(tab)[0];
+        var menus = document.getElementsByClassName("menu-item");
+        var _class = document.getElementById("class");
+        var course = document.getElementById("course");
+        var department = document.getElementById("department");
+        _class.classList.add("hidden");
+        course.classList.add("hidden");
+        department.classList.add("hidden");
+        for (let i = 0; i < menus.length; i++) {
+            menus[i].classList.remove("active");
+        }
+        div.classList.remove("hidden")
+        menu.classList.add("active")
+
+        var class_id = "{{class_id}}"
+        var active_div = document.getElementsByClassName("extra-menu-items")[0].getElementsByClassName('active')[0].classList[1]
+        var add_new = document.getElementsByClassName("action-buttons")[0].getElementsByTagName('a')[0];
+        console.log(add_new)
+        if (active_div === "class" ){
+        console.log(add_new.href)
+        add_new.href="{% url  "add-class"  %}";
+        }
+        else if (active_div === "course" ) {
+        add_new.href="{% url  "add-course"  %}";
+        }
+        else if (active_div === "department" ) {
+            add_new.href="{% url  "add-department"  %}";
+        }
+    }
+    
+
+</script>
+{% endblock js %}

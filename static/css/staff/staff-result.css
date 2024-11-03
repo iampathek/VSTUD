@@ -1,0 +1,69 @@
+.main-content {
+  padding: 30px;
+}
+
+.marks-table {
+  overflow-y: hidden;
+  height: 420px;  
+  padding-bottom: 20px;
+}
+
+td, th {
+  border-left: 1px solid #594bda;
+  border-bottom: 1px solid #594bda;
+  padding: 20px;
+}
+
+tr:hover td{
+  background-color: rgb(231, 248, 243);
+}
+.fail:hover td{
+  background-color: rgba(255, 230, 200, 1);
+}
+.fail{
+  background-color: rgba(250, 233, 214, 0.5);
+}
+
+th {
+  background-color: #594bda20;
+}
+
+button {
+  width: 100px;
+  padding: 14px;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  color: white;
+  background-color: #5a4bda;
+  cursor: pointer;
+  transition: ease-out 1s;
+  border: 1px solid #5a4bda;
+  border-radius: 10px;
+}
+button:active {
+  transform: scale(0.9);
+}
+.exam-container, .ia-container{
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 0px 10px 3px #0000000d; 
+      padding: 29px;
+      border-radius: 10px;
+      transition: height 0.5s ease;
+      background-color: white;
+      margin-bottom: 20px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+.hidden {
+  display: none;
+}
+
+   
+

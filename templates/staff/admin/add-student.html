@@ -1,0 +1,140 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Student{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block main_content %}
+<div class="main-content">    
+    <div class="form-container">
+        <form action="{% url "add-student" class_id %}" class="form" method = "post">
+            {% csrf_token %}
+            <div class="header margin-btm">
+                <h1 class="bold">Add Student</h1>
+            </div>
+            <div class="field-main-container">
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="name">First Name :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="text-field" placeholder="Enter student name ..." required name="first-name">
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="name">Last Name :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="text-field" placeholder="Enter student name ..." required name="last-name">
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="register-no">Register Number :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="number-field" placeholder="Enter RegNo." required name="register-number">
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="email">Email :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="email" class="text-field" placeholder="Enter Your Mail" required name="email">
+                    </div>
+                </div>
+                <div class="field-container hidden">
+                    <div class="field-label">
+                        <label for="class">Class :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" class="number-field" placeholder="Enter RegNo." required name="class" value="{{class_id}}">
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="dob">Date Of Birth :</label>
+                    </div>
+                    <div class="field-value">
+                       <input type="date" class="date-field" name="dob" id="dob" required>
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="gender">Select Gender :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="gender" class="dropdown-select" id="gender" required>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="transport">Select Transportation :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="transport" class="dropdown-select" id="transport" required>
+                                    <option value="bus">Bus</option>
+                                    <option value="hostel">Hostel</option>
+                                    <option value="private">Private</option>
+                                </select>
+                            </div>
+                        </p>    
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="phone-no">Phone Number :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="number" class="number-field" name="phone-no" id="phone-no" placeholder="Enter Ph-no." required>
+                    </div>
+                </div>
+                <div class="field-container margin-btm">
+                    <div class="field-label">
+                        <label for="mentor">Select Mentor :</label>
+                    </div>
+                    <div class="field-value">
+                        <p class="regular">
+                            <div class="dropdown-div">
+                                <select name="mentor" class="dropdown-select" id="mentor" required>
+                                    {% for mentor in mentors %}
+                                        <option value="{{mentor.user.username}}">{{mentor.user.username}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-container margin-btm">
+                <button type="submit" name="save_and_exit">Save & Exit</button>
+                <button type="submit" name="save_and_next">Save & Next</button>  
+            </div>
+        </form>
+    </div>        
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  users = document.getElementById("users");
+    users.classList.add("active"); 
+</script>
+{% endblock js %}

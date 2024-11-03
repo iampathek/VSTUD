@@ -1,0 +1,105 @@
+
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Add Staff Form{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "css/staff/forms.css" %}">
+{% endblock style %}
+
+{% block class_dropdown %}
+ <div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+                <a href="{% url "add-staff" class.class_id %}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+<div class="main-content">
+    <div class="form-container">
+        <form action = "{% url "add-staff" class_id %}" class="form" method = "post">
+            {% csrf_token %}
+            <div class="header">
+                <h1 class="semi-bold">Add Staffs</h1>
+              </div>
+              <div class="field-main-container">
+                <div class="field-container hidden">
+                    <div class="field-label">
+                      <label for="" class="medium">Class id :</label>
+                    </div>
+                    <div class="field-value">
+                      <input type="text" class="text-field" name="class_id" value="{{class_id}}"/>
+                    </div>
+                  </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="" class="medium">First name :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" placeholder="" class="text-field" name = "first_name">
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="" class="medium">Last name :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="text" placeholder="" class="text-field" name = "last_name">
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="" class="medium">Mobile number :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="number" placeholder="xxxxx-xxxxx" class="number-field" name = "staff_number">
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="" class="medium">Email :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="email" placeholder="abc@gmail.com" class="email-field" name = "staff_email">
+                    </div>
+                </div>
+                <div class="field-container">
+                    <div class="field-label">
+                        <label for="" class="medium">Registration no :</label>
+                    </div>
+                    <div class="field-value">
+                        <input type="number" class="number-field" name = "staff_reg">
+                    </div>
+                </div>
+              </div>
+              <div class="buttons-container">
+                <div class="save-and-exit-button">
+                    <button type = "submit" name = "save-and-exit">Save & Exit</button>
+                </div>
+                <div class="next-button">
+                    <button type = "submit" name = "next">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  users = document.getElementById("users");
+    users.classList.add("active"); 
+</script>
+{% endblock js %}
+
+
+

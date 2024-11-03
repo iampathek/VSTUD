@@ -1,0 +1,146 @@
+{% extends "staff/admin/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Results{% endblock title %}
+
+{% block style %}
+    <link rel="stylesheet" href= "{% static "css/staff/attendance.css" %}" >
+{% endblock style %}
+
+{% block class_dropdown %}
+<div class="class-dropdown-menu">
+    <div id="class-dropdown-menu-content" class="class-dropdown-menu-content">
+        {% for class in classes %}
+            {% if class.class_id !=  class_id %}
+            <a href="{% url "admin-results" class.class_id%}" onclick="selectItem(this)" class="uppercase">{{class.class_id}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock class_dropdown %}
+
+{% block main_content %}
+
+<div class="main-content">
+    <div class="admin-container">
+        <div class="inner-header">
+            <div class="extra-menu-items">
+                <div class="menu-item ia active" onclick="switchTab('ia')">Ia</div>
+                <div class="menu-item model" onclick="switchTab('model')">Model</div>
+                <div class="menu-item semester" onclick="switchTab('semester')">Semester</div>
+            </div>
+            <div class="action-buttons">
+                <a href="{% url "add-timetable-form" class_id=class_id %}">Add New</a>
+            </div>
+        </div>
+        <div class="ia" id="ia">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Code</th>
+                            <th>Subject Name</th>
+                            <th>Exam</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in ia_results %}
+                        <tr>
+                            <td>{{result.student.user.username}}</td>
+                            <td>{{result.exam.subject.code}}</td>
+                            <td>{{result.exam.subject.name}}</td>
+                            <td>{{result.exam.name}}</td>
+                            <td>{{result.marks}}</td>                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="model hidden" id="model">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Code</th>
+                            <th>Subject Name</th>
+                            <th>Exam</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in model_results %}
+                        <tr>
+                            <td>{{result.student.user.username}}</td>
+                            <td>{{result.exam.subject.code}}</td>
+                            <td>{{result.exam.subject.name}}</td>
+                            <td>{{result.exam.name}}</td>
+                            <td>{{result.marks}}</td>                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="semester hidden" id="semester">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Code</th>
+                            <th>Subject Name</th>
+                            <th>Exam</th>
+                            <th>Grade Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in semester_results %}
+                        <tr>
+                            <td>{{result.student.user.username}}</td>
+                            <td>{{result.exam.subject.code}}</td>
+                            <td>{{result.exam.subject.name}}</td>
+                            <td>{{result.exam.name}}</td>
+                            <td>{{result.grade}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}
+
+{% block js %}
+<script>
+    var sidebar_menu = document.getElementById("sidebar-menu");
+    var active_node = sidebar_menu.getElementsByClassName("active")[0];
+    active_node.classList.remove("active");
+    var  results = document.getElementById("results");
+    results.classList.add("active"); 
+
+    function switchTab(tab) {
+        var div = document.getElementById(tab);
+        var menu = document.getElementsByClassName(tab)[0];
+        var menus = document.getElementsByClassName("menu-item");
+        var ia = document.getElementById("ia");
+        var model = document.getElementById("model");
+        var semester = document.getElementById("semester");
+        ia.classList.add("hidden");
+        model.classList.add("hidden");
+        semester.classList.add("hidden");
+        for (let i = 0; i < menus.length; i++) {
+            menus[i].classList.remove("active");
+        }
+        div.classList.remove("hidden")
+        menu.classList.add("active")
+    }
+    
+
+</script>
+{% endblock js %}
